@@ -1,0 +1,25 @@
+<?php 
+    $postCollection = $block->getPostCollection();
+?>
+<h2>Demo Post</h2>
+<span><a href="<?= $block->getBaseUrl() . 'demo/index/newPost/' ?>">Add New Post</a></span>
+<table>
+    <tr>
+        <th>Id</th>
+        <th>Title</th>
+        <th>Status</th>
+        <th>Author</th>
+        <th>Content</th>
+        <th>Action</th>
+    </tr>
+    <?php foreach($postCollection as $post): ?>
+        <tr>
+            <td><?= $post->getId() ?></td>
+            <td><?= __($post->getTitle()) ?></td>
+            <td><?= __($post->getStatus()) ?></td>
+            <td><?= __($post->getAuthor()) ?></td>
+            <td><?= __($post->getContent()) ?></td>
+            <td><span><a href="<?= $block->getBaseUrl() . 'demo/index/input/id/' . $post->getId() ?>">Edit</a></span> | <span><a href="<?= $block->getBaseUrl() . 'demo/index/delete/id/' . $post->getId() ?>">Delete</a></span></td>
+        </tr>
+    <?php endforeach; ?>
+</table>
