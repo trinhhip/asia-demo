@@ -17,15 +17,17 @@ if ($post) {
 <h2>Add New/Edit Post</h2>
 <form action="<?= $block->getBaseUrl() . 'demo/index/formPost/' ?>" method="post" novalidate="novalidate">
     <input name="form_key" type="hidden" value="<?php echo $block->getFormKey(); ?>">
-    <input name="id" type="hidden" value="<?= $id ?>">
-    
-    <span>Title: </span> <input type="text" id="title" name="title" placeholder="<?=__('Post Title')?>" <?= !empty($title) ? 'value="' . $title . '"' : '' ?> >
-    
-    <span>Status: </span> <input type="text" id="status" name="status" placeholder="<?=__('Status')?>" <?= !empty($status) ? 'value="' . $status . '"' : '' ?> >
-    
-    <span>Author</span> <input type="text" id="author" name="author" placeholder="<?=__('Author')?>" <?= !empty($author) ? 'value="' . $author . '"' : '' ?> >
-    
-    <span>Content</span> <input type="text" id="content" name="content" placeholder="<?=__('Content')?>" <?= !empty($content) ? 'value="' . $content . '"' : '' ?> >
+    <?php if ($id) : ?>
+        <input name="id" type="hidden" value="<?= $id ?>">
+    <?php endif; ?>
+
+    <span>Title: </span> <input type="text" id="title" name="title" placeholder="<?= __('Post Title') ?>" <?= !empty($title) ? 'value="' . $title . '"' : '' ?>>
+
+    <span>Status: </span> <input type="text" id="status" name="status" placeholder="<?= __('Status') ?>" <?= !empty($status) ? 'value="' . $status . '"' : '' ?>>
+
+    <span>Author</span> <input type="text" id="author" name="author" placeholder="<?= __('Author') ?>" <?= !empty($author) ? 'value="' . $author . '"' : '' ?>>
+
+    <span>Content</span> <input type="text" id="content" name="content" placeholder="<?= __('Content') ?>" <?= !empty($content) ? 'value="' . $content . '"' : '' ?>>
 
     <button>Submit</button>
 </form>
