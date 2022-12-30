@@ -10,22 +10,31 @@ use Magento\Framework\App\Action\HttpGetActionInterface as HttpGetActionInterfac
 use Magento\Framework\App\Action\Context;
 use Magento\Framework\View\Result\PageFactory;
 
-class FormPost extends \Magento\Framework\App\Action\Action
+class Delete extends \Magento\Framework\App\Action\Action
 {
-    protected $postFactory;
-    protected $postResourceModel;
-    protected $resultFactory;
+    /**
+     * @var PageFactory
+     */
+    protected $resultPageFactory;
 
+    protected $postResourceModel;
+
+    protected $postFactory;
+
+    /**
+     * @param Context $context
+     * @param PageFactory $resultPageFactory
+     */
     public function __construct(
         Context $context,
         \Magento\Framework\Controller\ResultFactory $resultFactory,
-        \Neo\Demo\Model\PostFactory $postFactory,
-        \Neo\Demo\Model\ResourceModel\Post $postResourceModel
+        \Neo\Demo\Model\ResourceModel\Post $postResourceModel,
+        \Neo\Demo\Model\PostFactory $postFactory
     ) {
         parent::__construct($context);
-        $this->postFactory = $postFactory;
         $this->postResourceModel = $postResourceModel;
         $this->resultFactory = $resultFactory;
+        $this->postFactory = $postFactory;
     }
 
     /**
@@ -35,12 +44,10 @@ class FormPost extends \Magento\Framework\App\Action\Action
      */
     public function execute()
     {
-        $postValue = $this->getRequest()->getPostValue();
-        $post = $this->postFactory->create()->setData($postValue);
-        $post->save();
-
-        $this->_eventManager->dispatch('form_post_after_event', ['post' => $post]);
-
+        $postId = $this->getRequest()->getParam('id');
+        $post = $this->postFactory->create();
+        $this->postResourceModel->load($post, $postId);
+        $this->postResourceModel->delete($post);
         $redirect = $this->resultFactory->create(\Magento\Framework\Controller\ResultFactory::TYPE_REDIRECT);
         return $redirect->setUrl('/demo/index/index/');
     }

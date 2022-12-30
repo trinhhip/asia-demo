@@ -1,7 +1,9 @@
 <?php 
     $postCollection = $block->getPostCollection();
+    $block->setPostPageTitle('Set Page Title Value');
 ?>
-<h2>Demo Post</h2>
+<h2>Plus: <?= $block->plus(1, 2) ?></h2>
+<h2><?= $block->getPostPageTitle() ?></h2>
 <span><a href="<?= $block->getBaseUrl() . 'demo/index/newPost/' ?>">Add New Post</a></span>
 <table>
     <tr>
