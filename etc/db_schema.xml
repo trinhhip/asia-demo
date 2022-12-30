@@ -18,4 +18,14 @@
             <column name="id"/>
         </constraint>
     </table>
+
+    <table name="notify_to_author" resource="default" engine="innodb" >
+        <column xsi:type="int" name="id" padding="10" unsigned="true" nullable="false" identity="true"
+            comment="ID"/>
+        <column xsi:type="int" name="post_id" nullable="false" comment="Post ID"/>
+
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+    </table>
 </schema>
